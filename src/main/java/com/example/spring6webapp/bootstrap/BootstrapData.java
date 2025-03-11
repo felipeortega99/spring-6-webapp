@@ -29,26 +29,28 @@ public class BootstrapData  implements CommandLineRunner {
         eric.setFirstName("Eric");
         eric.setLastName("Evans");
 
-        Book ddd = new Book();
-        ddd.setTitle("Domain Driven Design");
-        ddd.setIsbn("123456");
-
-        Author ericSaved = authorRepository.save(eric);
-        Book dddSaved = bookRepository.save(ddd);
-
         Author rod = new Author();
         rod.setFirstName("Rod");
         rod.setLastName("Johnson");
 
+        Book ddd = new Book();
+        ddd.setTitle("Domain Driven Design");
+        ddd.setIsbn("123456");
+
         Book noEJB = new Book();
-        ddd.setTitle("J2EE Development without EJB");
-        ddd.setIsbn("54789642");
+        noEJB.setTitle("J2EE Development without EJB");
+        noEJB.setIsbn("54789642");
+
+        Author ericSaved = authorRepository.save(eric);
+        Book dddSaved = bookRepository.save(ddd);
 
         Author rodSaved = authorRepository.save(rod);
         Book noEJBSaved = bookRepository.save(noEJB);
 
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
+        ddd.getAuthors().add(ericSaved);
+        noEJB.getAuthors().add(rodSaved);
 
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Test Publisher");
